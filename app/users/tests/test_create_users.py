@@ -22,7 +22,9 @@ class PublicUsersAPITests(TestCase):
         self.client = APIClient()
 
     def test_create_valid_user_success(self):
-        '''Test creting new user with valid credentials is created succefully'''
+        '''Test creting new user with valid credentials
+         is created succefully
+        '''
         payload = {
             'email': 'test@londonappdev.com',
             'password': 'testpass123',
