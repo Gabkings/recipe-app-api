@@ -66,3 +66,13 @@ class MeodelTests(TestCase):
             name='Cucumber'
         )
         self.assertEqual(str(ingredient), ingredient.name)
+
+    def test_recipe_str(self):
+        '''Test the recipe's string representation'''
+        recipe = models.Recipe.objects.create(
+            user=sample_user(),
+            title='Mushroom Recipe 001',
+            price=300.00,
+            time_minutes=5
+        )
+        self.assertEqual(str(recipe), recipe.title)
