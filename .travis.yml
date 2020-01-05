@@ -6,7 +6,20 @@ python:
 services:
   - docker
 
-before_script: pip install docker-compose
+env:
+  global:
+    - CC_TEST_REPORTER_ID=a0212067a69dfdf1ff71247d0f3444e7fcfa9aee5a896dd9ab0394ce29718511
+
+
+before_script: 
+  - pip install docker-compose
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - docker-compose run --rm app sh -c "python manage.py test && flake8"
+  - bundle exec rspec
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
